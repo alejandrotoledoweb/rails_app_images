@@ -1,0 +1,19 @@
+<div id="<%= dom_id pin %>">
+  <p>
+    <strong>Title:</strong>
+    <%= pin.title %>
+  </p>
+
+  <%= pin.description %>
+
+  <br>
+
+  <% if pin.image.content_type.in?(%w[image/jpeg image/png]) %>
+    <%= link_to image_tag(pin.image_as_thumbnail), pin.image if pin.image.attached? %>
+  <% end %>
+  <% pin.pictures.each do |pic| %>
+    <% if pin.image.content_type.in?(%w[image/jpeg image/png]) %>
+      <%= link_to image_tag(pin.pictures_as_thumbnails(pic)), pic %>
+    <% end %>
+  <% end %>
+</div>
